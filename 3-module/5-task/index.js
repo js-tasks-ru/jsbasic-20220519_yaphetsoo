@@ -1,12 +1,8 @@
 function getMinMax(str) {
-  let splitedArr = str.split(" ");
-  let numberArr = [];
 
-  splitedArr.forEach(element => {
-    if (!isNaN(Number(element))) {
-      numberArr.push(Number(element));
-    }
-  });
+  let numberArr = str.split(" ")
+                     .filter(element => !isNaN(Number(element)))
+                     .map(element => Number(element));
 
   numberArr.sort(compare);
   return { min: numberArr[0], max: numberArr[numberArr.length - 1]};
