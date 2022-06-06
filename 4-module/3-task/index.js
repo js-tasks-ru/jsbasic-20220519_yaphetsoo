@@ -1,27 +1,29 @@
-/* eslint-disable indent */
 function highlight(table) {
-  let statusIndex = 3, genderIndex = 2, ageIndex = 1;
-  //getIndexes(table.rows[0]);
+  let indexes = { statusIndex: 0, genderIndex: 0, ageIndex: 0 };
+  setIndexes(table.rows[0], indexes);
 
   for (let i = 1; i < table.rows.length; i++) {
-    checkForStatus(table.rows[i], statusIndex);
-    checkForGender(table.rows[i], genderIndex);
-    checkForAge(table.rows[i], ageIndex);
+    checkForStatus(table.rows[i], indexes.statusIndex);
+    checkForGender(table.rows[i], indexes.genderIndex);
+    checkForAge(table.rows[i], indexes.ageIndex);
   }
 }
 
-// function getIndexes(row) {
-//   for (let i = 0; i < row.cells.length; i++) {
-//     switch (row.cells[i].innerHTML) {
-//       case "Status":
-//         statusIndex = i;
-//       case "Gender":
-//         genderIndex = i;
-//       case "Age":
-//         ageIndex = i;
-//     }
-//   }
-// }
+function setIndexes(row, indexes) {
+  for (let i = 0; i < row.cells.length; i++) {
+    switch (row.cells[i].innerHTML) {
+      case "Status":
+        indexes.statusIndex = i;
+        break;
+      case "Gender":
+        indexes.genderIndex = i;
+        break;
+      case "Age":
+        indexes.ageIndex = i;
+        break;
+    }
+  }
+}
 
 function checkForStatus(row, statusIndex) {
   if (row.cells[statusIndex].hasAttribute("data-available")) {
