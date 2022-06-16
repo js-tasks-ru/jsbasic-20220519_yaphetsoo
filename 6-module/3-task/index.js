@@ -6,6 +6,10 @@ export default class Carousel {
     this.elem = this.#render();
   }
 
+  get #offsetWidth() {
+    return this.elem.querySelector(".carousel__inner").offsetWidth;
+  }
+
   #render() {
     let carouselHtml = createElement(`
       <div class="carousel">
@@ -54,26 +58,26 @@ export default class Carousel {
   }
 
   #initCarousel(carouselHtml) {
+    alert(this.offsetWidthVal);
     let slidesCount = this.slides.length;
     let carousel = carouselHtml.querySelector('.carousel__inner');
     let leftCarouselButton = carouselHtml.querySelector('.carousel__arrow_left');
     let rightCarouselButton = carouselHtml.querySelector('.carousel__arrow_right');
 
-    // let container = document.querySelector(".container");
-    // let carouselOffsetWidth = Number(window.getComputedStyle(container).maxWidth.slice(0, -2));
-    let carouselOffsetWidth = 500;
+    let carouselOffsetWidth;
 
     leftCarouselButton.style.display = 'none';
     let currentSlide = 1;
 
-
     leftCarouselButton.addEventListener("click", () => {
+      carouselOffsetWidth = this.#offsetWidth;
       carousel.style.transform = `translateX(-${(currentSlide - 2) * carouselOffsetWidth}px)`;
       currentSlide--;
       setSlideButtons();
     });
 
     rightCarouselButton.addEventListener("click", () => {
+      carouselOffsetWidth = this.#offsetWidth;
       carousel.style.transform = `translateX(-${currentSlide * carouselOffsetWidth}px)`;
       currentSlide++;
       setSlideButtons();
