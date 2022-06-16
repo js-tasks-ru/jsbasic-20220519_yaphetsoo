@@ -58,7 +58,6 @@ export default class Carousel {
   }
 
   #initCarousel(carouselHtml) {
-    alert(this.offsetWidthVal);
     let slidesCount = this.slides.length;
     let carousel = carouselHtml.querySelector('.carousel__inner');
     let leftCarouselButton = carouselHtml.querySelector('.carousel__arrow_left');
